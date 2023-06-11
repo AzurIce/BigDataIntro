@@ -15,20 +15,22 @@ categories = [
     (3, "音乐"),
     (129, "舞蹈"),
     (4, "游戏"),
-    (36, "科技"),
+    (36, "知识"),
+    (188, "科技"),
+    (234, "运动"),
+    (223, "汽车"),
     (160, "生活"),
+    (211, "美食"),
+    (217, "动物圈"),
     (119, "鬼畜"),
     (155, "时尚"),
+    # 资讯
+    # 和广告去掉了
     (5, "娱乐"),
     (181, "影视"),
     # (177, "纪录片"),
     # (23, "电影"),
     # (11, "电视剧"),
-    (217, "游戏赛事"),
-    # (71, "综艺"),
-    (211, "美食"),
-    (217, "动物圈"),
-    # (22, "其他"),
 ]
 
 
@@ -43,7 +45,7 @@ def get_data(_tid):
     videos = []
     # Send GET request to the API URL with the parameters
     response = requests.get(url, params={'rid': f'{_tid}'})
-    # Extract the JSON data from the response
+    # Extract the JSON prjdata from the response
     # pprint(response.json())
     data = response.json()["data"]["list"]
     # pprint(data)
@@ -84,7 +86,7 @@ if __name__ == '__main__':
         try:
             video_list.extend(get_data(tid))
         except Exception as e:
-            print(f'Get data of {tid} failed')
+            print(f'Get prjdata of {tid} failed')
     # Create a pandas DataFrame from the video list
     df = pd.DataFrame(video_list,
                       columns=["category", "tid", "bvid", "title", "desc", "pubdate", "owner_mid", "owner_name", "view",
@@ -92,4 +94,4 @@ if __name__ == '__main__':
 
     # print(df)
     # Save the DataFrame to a CSV file
-    df.to_csv("top100_video_detail.csv", index=False)
+    df.to_csv("top100_video_detail2.csv", index=False)
